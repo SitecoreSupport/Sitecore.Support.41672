@@ -31,7 +31,9 @@ namespace Sitecore.Support.Commerce.XA.Foundation.CommerceEngine.Managers
 
             try
             {
-                var getUserResponse = this.GetUser(emailAddress);
+                #region - modified part of the code - added Storefront name (as a domain) before user's email
+                var getUserResponse = this.GetUser(StorefrontContext.CurrentStorefront.ShopName + "\\" + emailAddress);
+                #endregion
 
                 if (!getUserResponse.ServiceProviderResult.Success || getUserResponse.Result == null)
                 {
